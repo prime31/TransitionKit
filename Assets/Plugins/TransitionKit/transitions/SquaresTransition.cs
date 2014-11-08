@@ -29,6 +29,12 @@ namespace Prime31.TransitionKit
 		}
 
 
+		public Texture2D textureForDisplay()
+		{
+			return null;
+		}
+
+
 		public IEnumerator onScreenObscured( TransitionKit transitionKit )
 		{
 			transitionKit.transitionKitCamera.clearFlags = CameraClearFlags.Nothing;
@@ -49,11 +55,7 @@ namespace Prime31.TransitionKit
 				yield return null;
 			}
 
-			var tex = new Texture2D( 1, 1 );
-			tex.SetPixel( 0, 0, Color.clear );
-			tex.Apply();
-
-			transitionKit.material.mainTexture = tex;
+			transitionKit.makeTextureTransparent();
 
 			if( fadedDelay > 0 )
 				yield return new WaitForSeconds( fadedDelay );
@@ -73,10 +75,6 @@ namespace Prime31.TransitionKit
 
 			transitionKit.cleanup();
 		}
-
-
-		public void onLevelWasLoaded( TransitionKit transitionKit, int level )
-		{}
 
 		#endregion
 

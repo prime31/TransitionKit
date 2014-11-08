@@ -9,6 +9,10 @@ namespace Prime31.TransitionKit
 	{
 		public Color fadeToColor = Color.black;
 		public float duration = 0.5f;
+		/// <summary>
+		/// the effect looks best when it pauses before fading back. When not doing a scene-to-scene transition you may want
+		/// to pause for a breif moment before fading back.
+		/// </summary>
 		public float fadedDelay = 0f;
 		public int nextScene = -1;
 
@@ -22,6 +26,12 @@ namespace Prime31.TransitionKit
 
 
 		public Mesh meshForDisplay()
+		{
+			return null;
+		}
+
+
+		public Texture2D textureForDisplay()
 		{
 			return null;
 		}
@@ -45,11 +55,7 @@ namespace Prime31.TransitionKit
 				yield return null;
 			}
 
-			var tex = new Texture2D( 1, 1 );
-			tex.SetPixel( 0, 0, Color.clear );
-			tex.Apply();
-
-			transitionKit.material.mainTexture = tex;
+			transitionKit.makeTextureTransparent();
 
 			if( fadedDelay > 0 )
 				yield return new WaitForSeconds( fadedDelay );
@@ -70,9 +76,6 @@ namespace Prime31.TransitionKit
 			transitionKit.cleanup();
 		}
 
-
-		public void onLevelWasLoaded( TransitionKit transitionKit, int level )
-		{}
 
 		#endregion
 

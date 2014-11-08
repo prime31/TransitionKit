@@ -25,6 +25,12 @@ public class BlurTransition : TransitionKitDelegate
 	}
 
 
+	public Texture2D textureForDisplay()
+	{
+		return null;
+	}
+
+
 	public IEnumerator onScreenObscured( TransitionKit transitionKit )
 	{
 		transitionKit.transitionKitCamera.clearFlags = CameraClearFlags.Nothing;
@@ -50,10 +56,6 @@ public class BlurTransition : TransitionKitDelegate
 
 		transitionKit.cleanup();
 	}
-
-
-	public void onLevelWasLoaded( TransitionKit transitionKit, int level )
-	{}
 
 	#endregion
 

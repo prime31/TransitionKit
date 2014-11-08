@@ -38,6 +38,12 @@ namespace Prime31.TransitionKit
 		}
 
 
+		public Texture2D textureForDisplay()
+		{
+			return null;
+		}
+
+
 		public IEnumerator onScreenObscured( TransitionKit transitionKit )
 		{
 			if( nextScene >= 0 )
@@ -88,10 +94,6 @@ namespace Prime31.TransitionKit
 
 			transitionKit.cleanup();
 		}
-
-
-		public void onLevelWasLoaded( TransitionKit transitionKit, int level )
-		{}
 
 		#endregion
 

@@ -25,6 +25,28 @@ public class SceneSwitcher : MonoBehaviour
 		}
 
 
+		if( GUILayout.Button( "Vertical Slices to Scene" ) )
+		{
+			var slices = new VerticalSlicesTransition()
+			{
+				nextScene = Application.loadedLevel == 0 ? 1 : 0,
+				divisions = Random.Range( 3, 20 )
+			};
+			TransitionKit.instance.transitionWithDelegate( slices );
+		}
+
+
+		if( GUILayout.Button( "Triangle Slices to Scene" ) )
+		{
+			var slices = new TriangleSlicesTransition()
+			{
+				nextScene = Application.loadedLevel == 0 ? 1 : 0,
+				divisions = Random.Range( 2, 10 )
+			};
+			TransitionKit.instance.transitionWithDelegate( slices );
+		}
+
+
 		if( GUILayout.Button( "Pixelate to Scene with Random Scale Effect" ) )
 		{
 			var enumValues = System.Enum.GetValues( typeof( PixelateTransition.PixelateFinalScaleEffect ) );
@@ -92,5 +114,32 @@ public class SceneSwitcher : MonoBehaviour
 			};
 			TransitionKit.instance.transitionWithDelegate( squares );
 		}
+	}
+
+
+	void OnEnable()
+	{
+		TransitionKit.onScreenObscured += onScreenObscured;
+		TransitionKit.onTransitionComplete += onTransitionComplete;
+	}
+
+
+	void OnDisable()
+	{
+		// as good citizens we ALWAYS remove event handlers that we added
+		TransitionKit.onScreenObscured -= onScreenObscured;
+		TransitionKit.onTransitionComplete -= onTransitionComplete;
+	}
+
+
+	void onScreenObscured()
+	{
+		Debug.Log( "onScreenObscured fired at time: " + Time.time );
+	}
+
+
+	void onTransitionComplete()
+	{
+		Debug.Log( "onTransitionComplete fired at time: " + Time.time );
 	}
 }
