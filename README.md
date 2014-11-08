@@ -3,6 +3,8 @@ TransitionKit
 
 Modular, extensible transitions in-scene and between scenes. TransitionKit aims to make transitions easy. The main gist of how it works is that when invoked it snaps a screenshot and sticks it on a quad (by default but you can override this behavior). This means that you can reuse any of your full screen image effects with TransitionKit since it works in fundamentally the exact same way.
 
+Side note: if you make any neat transitions feel free to send over a pull request so we can build up a nice library of useful transitions!
+
 
 
 In-Scene Transitions
