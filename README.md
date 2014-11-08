@@ -16,6 +16,31 @@ Between Scene Transitions
 Switching scenes with Unity in a classy-looking fashion can be tricky. TransitionKit aims to simplify the process. All of the built in transitions allow you to specify a new scene to load and they will wait for it to load before the screen is unobscured.
 
 
+
+Example
+-----
+
+This is an example of doing a scene-to-scene transition using the included FadeTransition. The FadeTransition will fade to the specified Color and then fade out to the newly loaded scene. If you wanted to do this transition in-scene, you would just omit setting the nextScene field.
+
+	var fader = new FadeTransition()
+	{
+		nextScene = 3,
+		fadeToColor = Color.white
+	};
+	TransitionKit.instance.transitionWithDelegate( fader );
+
+
+The PixelatorTransition is a bit different than the others. Rather than pixelate both out and then in it will pixelate out the current scene and then uses an animation to wipe/zoom the old scene out of the way. The reason it does this is because pixelating the new scene back in would result in a jarring change between the first and second scenes. It provides a bit of variety as well and shows how you can do animations on the quad displaying the screenshot.
+
+	var pixelater = new PixelateTransition()
+	{
+		nextScene = 2,
+		finalScaleEffect = PixelateTransition.PixelateFinalScaleEffect.ToPoint,
+		duration = 1.0f
+	};
+	TransitionKit.instance.transitionWithDelegate( pixelater );
+
+
 Custom Transitions
 -----
 
