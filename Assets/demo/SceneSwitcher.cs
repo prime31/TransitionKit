@@ -3,13 +3,25 @@ using System.Collections;
 using Prime31.TransitionKit;
 
 
+/// <summary>
+/// To use the demo just add all three scenes to your build settings making sure the BoostrapScene is scene 0
+/// </summary>
 public class SceneSwitcher : MonoBehaviour
 {
+	private bool _isUiVisible = true;
+
+
+	void Awake()
+	{
+		DontDestroyOnLoad( gameObject );
+		Application.LoadLevel( 1 );
+	}
+
+
 	void OnGUI()
 	{
-		// this is a ghetto-style hack because we are using the terrible GUI class in this simple demo.
-		// we just want to hide the GUI while TransitionKit is active
-		if( GameObject.Find( "TransitionKit" ) )
+		// hide the UI during transitions
+		if( !_isUiVisible )
 			return;
 
 
@@ -17,7 +29,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var fader = new FadeTransition()
 			{
-				nextScene = Application.loadedLevel == 0 ? 1 : 0,
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
 				fadedDelay = 0.2f,
 				fadeToColor = Color.white
 			};
@@ -29,7 +41,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var slices = new VerticalSlicesTransition()
 			{
-				nextScene = Application.loadedLevel == 0 ? 1 : 0,
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
 				divisions = Random.Range( 3, 20 )
 			};
 			TransitionKit.instance.transitionWithDelegate( slices );
@@ -40,7 +52,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var slices = new TriangleSlicesTransition()
 			{
-				nextScene = Application.loadedLevel == 0 ? 1 : 0,
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
 				divisions = Random.Range( 2, 10 )
 			};
 			TransitionKit.instance.transitionWithDelegate( slices );
@@ -54,7 +66,7 @@ public class SceneSwitcher : MonoBehaviour
 
 			var pixelater = new PixelateTransition()
 			{
-				nextScene = Application.loadedLevel == 0 ? 1 : 0,
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
 				finalScaleEffect = randomScaleEffect,
 				duration = 1.0f
 			};
@@ -72,7 +84,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var blur = new BlurTransition()
 			{
-				nextScene = Application.loadedLevel == 0 ? 1 : 0,
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
 				duration = 2.0f,
 				blurMax = 0.01f
 			};
@@ -95,7 +107,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var squares = new SquaresTransition()
 			{
-				nextScene = Application.loadedLevel == 0 ? 1 : 0,
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
 				duration = 2.0f
 			};
 			TransitionKit.instance.transitionWithDelegate( squares );
@@ -106,7 +118,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var squares = new SquaresTransition()
 			{
-				nextScene = Application.loadedLevel == 0 ? 1 : 0,
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
 				duration = 2.0f,
 				squareSize = new Vector2( 64f, 45f ),
 				squareColor = Color.yellow,
@@ -135,11 +147,13 @@ public class SceneSwitcher : MonoBehaviour
 	void onScreenObscured()
 	{
 		Debug.Log( "onScreenObscured fired at time: " + Time.time );
+		_isUiVisible = false;
 	}
 
 
 	void onTransitionComplete()
 	{
 		Debug.Log( "onTransitionComplete fired at time: " + Time.time );
+		_isUiVisible = true;
 	}
 }
