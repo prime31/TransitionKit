@@ -6,8 +6,7 @@ namespace Prime31.TransitionKit
 {
 	/// <summary>
 	/// this is the interface an object must conform to for use with TransitionKit. Delegates can return custom shaders, meshes
-	/// and textures if needed. The only real stipulation is that at some point (preferably when the transition is complete) the
-	/// delegate must notifiy TransitionKit by calling transitionKit.cleanup().
+	/// and textures if needed.
 	/// </summary>
 	public interface TransitionKitDelegate
 	{
@@ -34,7 +33,8 @@ namespace Prime31.TransitionKit
 
 
 		/// <summary>
-		/// called when the screen is fully obscured. You can now load a new scene or modify the current one and it will be fully obscured from view
+		/// called when the screen is fully obscured. You can now load a new scene or modify the current one and it will be fully obscured from view.
+		/// Note that when control returns from this method TransitionKit will kill itself.
 		/// </summary>
 		IEnumerator onScreenObscured( TransitionKit transitionKit );
 	}

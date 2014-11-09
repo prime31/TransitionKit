@@ -125,11 +125,12 @@ namespace Prime31.TransitionKit
 			transitionKitCamera.depth = float.MaxValue;
 			transitionKitCamera.cullingMask = 1 << _transitionKitLayer;
 
-			if( _transitionKitDelegate != null )
-				StartCoroutine( _transitionKitDelegate.onScreenObscured( this ) );
-
 			if( onScreenObscured != null )
 				onScreenObscured();
+
+			yield return StartCoroutine( _transitionKitDelegate.onScreenObscured( this ) );
+
+			cleanup();
 		}
 
 
@@ -140,6 +141,23 @@ namespace Prime31.TransitionKit
 			screenSnapshot.Apply();
 
 			return screenSnapshot;
+		}
+
+
+		/// <summary>
+		/// this method signals a cleanup (duh) and notifies event listeners
+		/// </summary>
+		private void cleanup()
+		{
+			if( _instance == null )
+				return;
+
+			if( onTransitionComplete != null )
+				onTransitionComplete();
+
+			Destroy( gameObject );
+			_instance = null;
+			_isInitialized = false;
 		}
 
 		#endregion
@@ -169,23 +187,6 @@ namespace Prime31.TransitionKit
 			tex.Apply();
 
 			material.mainTexture = tex;
-		}
-
-
-		/// <summary>
-		/// delegates MUST call this when they are done with their transition! It signals a cleanup (duh) and notifies event listeners
-		/// </summary>
-		public void cleanup()
-		{
-			if( _instance == null )
-				return;
-
-			if( onTransitionComplete != null )
-				onTransitionComplete();
-
-			Destroy( gameObject );
-			_instance = null;
-			_isInitialized = false;
 		}
 
 

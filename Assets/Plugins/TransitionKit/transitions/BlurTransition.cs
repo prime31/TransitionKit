@@ -53,8 +53,6 @@ public class BlurTransition : TransitionKitDelegate
 		// we dont transition back to the new scene unless it is loaded
 		if( nextScene >= 0 )
 			yield return transitionKit.StartCoroutine( transitionKit.waitForLevelToLoad( nextScene ) );
-
-		transitionKit.cleanup();
 	}
 
 	#endregion

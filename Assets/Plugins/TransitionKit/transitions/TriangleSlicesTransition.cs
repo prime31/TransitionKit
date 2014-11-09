@@ -158,8 +158,6 @@ public class TriangleSlicesTransition : TransitionKitDelegate
 
 			yield return null;
 		}
-
-		transitionKit.cleanup();
 	}
 
 	#endregion

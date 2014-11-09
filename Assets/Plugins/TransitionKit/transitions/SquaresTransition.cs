@@ -72,8 +72,6 @@ namespace Prime31.TransitionKit
 
 				yield return null;
 			}
-
-			transitionKit.cleanup();
 		}
 
 		#endregion

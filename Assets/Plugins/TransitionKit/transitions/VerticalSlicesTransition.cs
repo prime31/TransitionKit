@@ -119,12 +119,12 @@ public class VerticalSlicesTransition : TransitionKitDelegate
 	{
 		transitionKit.transitionKitCamera.clearFlags = CameraClearFlags.Nothing;
 
-		if( nextScene >= 0 )
-			Application.LoadLevelAsync( nextScene );
-
 		// we dont transition back to the new scene unless it is loaded
 		if( nextScene >= 0 )
+		{
+			Application.LoadLevelAsync( nextScene );
 			yield return transitionKit.StartCoroutine( transitionKit.waitForLevelToLoad( nextScene ) );
+		}
 
 		var transitionDistance = 10f; // 2x our camera.orthoSize so we move the slices off screen
 		var elapsed = 0f;
@@ -150,8 +150,6 @@ public class VerticalSlicesTransition : TransitionKitDelegate
 
 			yield return null;
 		}
-
-		transitionKit.cleanup();
 	}
 
 	#endregion

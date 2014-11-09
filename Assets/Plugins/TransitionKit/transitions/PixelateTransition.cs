@@ -91,8 +91,6 @@ namespace Prime31.TransitionKit
 			}
 
 			yield return transitionKit.StartCoroutine( animateScale( transitionKit.transform, duration * 0.5f, desiredScale ) );
-
-			transitionKit.cleanup();
 		}
 
 		#endregion
