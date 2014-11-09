@@ -125,8 +125,8 @@ public class SceneSwitcher : MonoBehaviour
 			};
 			TransitionKit.instance.transitionWithDelegate( squares );
 		}
-		
-		
+
+
 		if( GUILayout.Button( "Ripples to Scene" ) )
 		{
 			var ripple = new RippleTransition()
@@ -138,8 +138,8 @@ public class SceneSwitcher : MonoBehaviour
 			};
 			TransitionKit.instance.transitionWithDelegate( ripple );
 		}
-		
-		
+
+
 		if( GUILayout.Button( "Fish Eye to Scene" ) )
 		{
 			var fishEye = new FishEyeTransition()
@@ -152,8 +152,8 @@ public class SceneSwitcher : MonoBehaviour
 			};
 			TransitionKit.instance.transitionWithDelegate( fishEye );
 		}
-		
-		
+
+
 		if( GUILayout.Button( "Fish Eye (alternate params) to Scene" ) )
 		{
 			var fishEye = new FishEyeTransition()
@@ -166,8 +166,8 @@ public class SceneSwitcher : MonoBehaviour
 			};
 			TransitionKit.instance.transitionWithDelegate( fishEye );
 		}
-		
-		
+
+
 		if( GUILayout.Button( "Doorway to Scene" ) )
 		{
 			var doorway = new DoorwayTransition()
@@ -180,8 +180,8 @@ public class SceneSwitcher : MonoBehaviour
 			};
 			TransitionKit.instance.transitionWithDelegate( doorway );
 		}
-		
-		
+
+
 		if( GUILayout.Button( "Doorway (reversed) to Scene" ) )
 		{
 			var doorway = new DoorwayTransition()
@@ -192,6 +192,18 @@ public class SceneSwitcher : MonoBehaviour
 				runEffectInReverse = true
 			};
 			TransitionKit.instance.transitionWithDelegate( doorway );
+		}
+
+
+		if( GUILayout.Button( "Wind to Scene" ) )
+		{
+			var wind = new WindTransition()
+			{
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				duration = 1.0f,
+				size = 0.3f
+			};
+			TransitionKit.instance.transitionWithDelegate( wind );
 		}
 	}
 
