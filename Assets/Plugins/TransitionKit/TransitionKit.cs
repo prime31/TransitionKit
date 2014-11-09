@@ -63,6 +63,8 @@ namespace Prime31.TransitionKit
 		}
 
 
+		#region Private
+
 		void initialize()
 		{
 			if( _isInitialized )
@@ -139,6 +141,8 @@ namespace Prime31.TransitionKit
 
 			return screenSnapshot;
 		}
+
+		#endregion
 
 
 		#region Public
