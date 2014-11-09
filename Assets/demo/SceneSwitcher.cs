@@ -31,7 +31,7 @@ public class SceneSwitcher : MonoBehaviour
 			{
 				nextScene = Application.loadedLevel == 1 ? 2 : 1,
 				fadedDelay = 0.2f,
-				fadeToColor = Color.white
+				fadeToColor = Color.black
 			};
 			TransitionKit.instance.transitionWithDelegate( fader );
 		}

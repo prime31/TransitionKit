@@ -19,7 +19,14 @@ namespace Prime31.TransitionKit
 		public static event Action onTransitionComplete;
 
 
-		private bool _isInitialized = false;
+		/// <summary>
+		/// if true, TransitionKit will not remove itself when the transition is complete. Instead, it will just disable itself and free up used resources.
+		/// </summary>
+		public static bool keepTransitionKitInstance = false;
+
+		/// <summary>
+		/// the layer we will use for TK. The camera will be set to only render this layer.
+		/// </summary>
 		private const int _transitionKitLayer = 31;
 
 		private TransitionKitDelegate _transitionKitDelegate;
@@ -65,22 +72,27 @@ namespace Prime31.TransitionKit
 
 		#region Private
 
+		T getOrAddComponent<T>() where T : Component
+		{
+			var component = gameObject.GetComponent<T>();
+			if( component == null )
+				component = gameObject.AddComponent<T>();
+
+			return component;
+		}
+
 		void initialize()
 		{
-			if( _isInitialized )
-				return;
-
 			// create the MeshFilter
-			gameObject.AddComponent<MeshFilter>().mesh = _transitionKitDelegate.meshForDisplay() ?? generateQuadMesh();
+			var meshFilter = getOrAddComponent<MeshFilter>();
+			meshFilter.mesh = _transitionKitDelegate.meshForDisplay() ?? generateQuadMesh();
 
 			// create the Material
-			material = gameObject.AddComponent<MeshRenderer>().material;
+			material = getOrAddComponent<MeshRenderer>().material;
 			material.shader = _transitionKitDelegate.shaderForTransition() ?? Shader.Find( "Unlit/Texture" );
 
 			// snapshot the main camera before proceeding
 			_instance.StartCoroutine( _instance.setupCameraAndTexture() );
-
-			_isInitialized = true;
 		}
 
 
@@ -118,12 +130,16 @@ namespace Prime31.TransitionKit
 			material.mainTexture = _transitionKitDelegate.textureForDisplay() ?? getScreenshotTexture();
 
 			// create our camera to cover the screen
-			transitionKitCamera = gameObject.AddComponent<Camera>();
+			transitionKitCamera = getOrAddComponent<Camera>();
+
+			// always reset these in case a transition messed with them
 			transitionKitCamera.isOrthoGraphic = true;
 			transitionKitCamera.nearClipPlane = -1f;
 			transitionKitCamera.farClipPlane = 1f;
 			transitionKitCamera.depth = float.MaxValue;
 			transitionKitCamera.cullingMask = 1 << _transitionKitLayer;
+			transitionKitCamera.clearFlags = CameraClearFlags.Nothing;
+			transitionKitCamera.enabled = true;
 
 			if( onScreenObscured != null )
 				onScreenObscured();
@@ -155,9 +171,21 @@ namespace Prime31.TransitionKit
 			if( onTransitionComplete != null )
 				onTransitionComplete();
 
-			Destroy( gameObject );
-			_instance = null;
-			_isInitialized = false;
+			_transitionKitDelegate = null;
+
+			// if we are keeping TK alive we only need to free resources and not delete ourself completely
+			if( keepTransitionKitInstance )
+			{
+				GetComponent<MeshRenderer>().material.mainTexture = null;
+				GetComponent<MeshFilter>().mesh = null;
+				gameObject.SetActive( false );
+				transitionKitCamera.enabled = false;
+			}
+			else
+			{
+				Destroy( gameObject );
+				_instance = null;
+			}
 		}
 
 		#endregion
@@ -171,6 +199,7 @@ namespace Prime31.TransitionKit
 		/// <param name="transitionKitDelegate">Transition kit delegate.</param>
 		public void transitionWithDelegate( TransitionKitDelegate transitionKitDelegate )
 		{
+			gameObject.SetActive( true );
 			_transitionKitDelegate = transitionKitDelegate;
 			initialize();
 		}
