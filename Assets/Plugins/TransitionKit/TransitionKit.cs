@@ -229,6 +229,29 @@ namespace Prime31.TransitionKit
 			while( Application.loadedLevel != level )
 				yield return null;
 		}
+		
+		
+		/// <summary>
+		/// the most common type of transition seems to be one that ticks progress from 0 - 1. This method takes care of that for you
+		/// if your transition needs to have a _Progress property ticked after the scene loads.
+		/// </summary>
+		/// <param name="duration">duration</param>
+		/// <param name="reverseDirection">if true, _Progress will go from 1 to 0. If false, it goes form 0 to 1</param>
+		public IEnumerator tickProgressPropertyInMaterial( float duration, bool reverseDirection = false )
+		{
+			var start = reverseDirection ? 1f : 0f;
+			var end = reverseDirection ? 0f : 1f;
+			
+			var elapsed = 0f;
+			while( elapsed < duration )
+			{
+				elapsed += Time.deltaTime;
+				var step = Mathf.Lerp( start, end, Mathf.Pow( elapsed / duration, 2f ) );
+				material.SetFloat( "_Progress", step );
+
+				yield return null;
+			}
+		}
 
 		#endregion
 

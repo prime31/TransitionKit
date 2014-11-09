@@ -45,15 +45,7 @@ namespace Prime31.TransitionKit
 			if( nextScene >= 0 )
 				Application.LoadLevelAsync( nextScene );
 
-			var elapsed = 0f;
-			while( elapsed < duration )
-			{
-				elapsed += Time.deltaTime;
-				var step = Mathf.Pow( elapsed / duration, 2f );
-				transitionKit.material.SetFloat( "_Progress", step );
-
-				yield return null;
-			}
+			yield return transitionKit.StartCoroutine( transitionKit.tickProgressPropertyInMaterial( duration ) );
 
 			transitionKit.makeTextureTransparent();
 
@@ -64,14 +56,7 @@ namespace Prime31.TransitionKit
 			if( nextScene >= 0 )
 				yield return transitionKit.StartCoroutine( transitionKit.waitForLevelToLoad( nextScene ) );
 
-			while( elapsed > 0f )
-			{
-				elapsed -= Time.deltaTime;
-				var step = Mathf.Pow( elapsed / duration, 2f );
-				transitionKit.material.SetFloat( "_Progress", step );
-
-				yield return null;
-			}
+			yield return transitionKit.StartCoroutine( transitionKit.tickProgressPropertyInMaterial( duration, true ) );
 		}
 
 		#endregion

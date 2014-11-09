@@ -43,11 +43,10 @@ float rand( float2 co )
 
 fixed4 frag( v2f_img i ) : COLOR
 {
-	float2 p = i.uv;
-	float r = rand( floor( _Size.xy * p ) );
+	float r = rand( floor( _Size.xy * i.uv ) );
 	float m = smoothstep( 0.0, -_Smoothness, r - ( _Progress * ( 1.0 + _Smoothness ) ) );
 
-	return mix( tex2D( _MainTex, p ), _Color, m );
+	return mix( tex2D( _MainTex, i.uv ), _Color, m );
 }
 
 ENDCG

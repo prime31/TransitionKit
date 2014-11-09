@@ -3,12 +3,11 @@
 	Properties
 	{
 		_MainTex ( "Base (RGB)", 2D ) = "white" {}
-		_BlurAmount ( "Blur Amount", Range( 0.0, 1.0 ) ) = 0.0005
+		_BlurSize ( "Blur Size", Range( 0.0, 0.01 ) ) = 0.05
 	}
 
 	SubShader
 	{
-		//Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
 		Tags { "RenderType" = "Opaque" }
 
 		Pass
@@ -24,31 +23,24 @@ CGPROGRAM
 
 // uniforms
 sampler2D _MainTex;
-uniform half _BlurAmount;
-
+uniform float _BlurSize;
 
 
 fixed4 frag( v2f_img i ) : COLOR
 {
-    half4 texcol = half4( 0.0 );
-    float remaining = 1.0f;
-    float coef = 1.0;
-    float fI = 0;
+	vec2 vTexCoord = i.uv;
+	vec4 sum = vec4( 0.0 );
+	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y - 4.0 * _BlurSize ) ) * 0.05;
+	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y - 3.0 * _BlurSize ) ) * 0.09;
+	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y - 2.0 * _BlurSize ) ) * 0.12;
+	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y - _BlurSize ) ) * 0.15;
+	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y ) ) * 0.16;
+	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y + _BlurSize ) ) * 0.15;
+	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y + 2.0 * _BlurSize ) ) * 0.12;
+	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y + 3.0 * _BlurSize ) ) * 0.09;
+	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y + 4.0 * _BlurSize ) ) * 0.05;
 
-    for( int j = 0; j < 3; j++ )
-    {
-    	fI++;
-    	coef *= 0.32;
-    	texcol += tex2D( _MainTex, float2( i.uv.x, i.uv.y - fI * _BlurAmount ) ) * coef;
-    	texcol += tex2D( _MainTex, float2( i.uv.x - fI * _BlurAmount, i.uv.y ) ) * coef;
-    	texcol += tex2D( _MainTex, float2( i.uv.x + fI * _BlurAmount, i.uv.y ) ) * coef;
-    	texcol += tex2D( _MainTex, float2( i.uv.x, i.uv.y + fI * _BlurAmount ) ) * coef;
-
-    	remaining -= 4 * coef;
-    }
-    texcol += tex2D( _MainTex, float2( i.uv.x, i.uv.y ) ) * remaining;
-
-    return texcol;
+	return sum;
 }
 
 ENDCG

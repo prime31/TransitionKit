@@ -24,7 +24,6 @@ public class SceneSwitcher : MonoBehaviour
 		if( !_isUiVisible )
 			return;
 
-
 		if( GUILayout.Button( "Fade to Scene" ) )
 		{
 			var fader = new FadeTransition()
@@ -126,6 +125,74 @@ public class SceneSwitcher : MonoBehaviour
 			};
 			TransitionKit.instance.transitionWithDelegate( squares );
 		}
+		
+		
+		if( GUILayout.Button( "Ripples to Scene" ) )
+		{
+			var ripple = new RippleTransition()
+			{
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				duration = 1.0f,
+				amplitude = 1500f,
+				speed = 20f
+			};
+			TransitionKit.instance.transitionWithDelegate( ripple );
+		}
+		
+		
+		if( GUILayout.Button( "Fish Eye to Scene" ) )
+		{
+			var fishEye = new FishEyeTransition()
+			{
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				duration = 1.0f,
+				size = 0.08f,
+				zoom = 10.0f,
+				colorSeparation = 3.0f
+			};
+			TransitionKit.instance.transitionWithDelegate( fishEye );
+		}
+		
+		
+		if( GUILayout.Button( "Fish Eye (alternate params) to Scene" ) )
+		{
+			var fishEye = new FishEyeTransition()
+			{
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				duration = 2.0f,
+				size = 0.2f,
+				zoom = 100.0f,
+				colorSeparation = 0.1f
+			};
+			TransitionKit.instance.transitionWithDelegate( fishEye );
+		}
+		
+		
+		if( GUILayout.Button( "Doorway to Scene" ) )
+		{
+			var doorway = new DoorwayTransition()
+			{
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				duration = 1.0f,
+				perspective = 1.5f,
+				depth = 3f,
+				runEffectInReverse = false
+			};
+			TransitionKit.instance.transitionWithDelegate( doorway );
+		}
+		
+		
+		if( GUILayout.Button( "Doorway (reversed) to Scene" ) )
+		{
+			var doorway = new DoorwayTransition()
+			{
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				duration = 1.0f,
+				perspective = 1.1f,
+				runEffectInReverse = true
+			};
+			TransitionKit.instance.transitionWithDelegate( doorway );
+		}
 	}
 
 
@@ -146,14 +213,12 @@ public class SceneSwitcher : MonoBehaviour
 
 	void onScreenObscured()
 	{
-		Debug.Log( "onScreenObscured fired at time: " + Time.time );
 		_isUiVisible = false;
 	}
 
 
 	void onTransitionComplete()
 	{
-		Debug.Log( "onTransitionComplete fired at time: " + Time.time );
 		_isUiVisible = true;
 	}
 }

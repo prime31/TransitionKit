@@ -7,8 +7,8 @@ public class BlurTransition : TransitionKitDelegate
 {
 	public float duration = 0.5f;
 	public int nextScene = -1;
-	public float blurMin = 0.00001f;
-	public float blurMax = 0.02f;
+	public float blurMin = 0.0f;
+	public float blurMax = 0.01f;
 
 
 	#region TransitionKitDelegate implementation
@@ -45,7 +45,7 @@ public class BlurTransition : TransitionKitDelegate
 			var step = Mathf.Pow( elapsed / duration, 2f );
 			var blurAmount = Mathf.Lerp( blurMin, blurMax, step );
 
-			transitionKit.material.SetFloat( "_BlurAmount", blurAmount );
+			transitionKit.material.SetFloat( "_BlurSize", blurAmount );
 
 			yield return null;
 		}
