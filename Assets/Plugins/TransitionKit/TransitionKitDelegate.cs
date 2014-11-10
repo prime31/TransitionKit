@@ -11,7 +11,7 @@ namespace Prime31.TransitionKit
 	public interface TransitionKitDelegate
 	{
 		/// <summary>
-		/// if the transition needs a custom shader return it here otherwise return null which will use the Unlit/Texture shader
+		/// if the transition needs a custom shader return it here otherwise return null which will use the TextureWithAlpha shader
 		/// </summary>
 		/// <returns>The for transition.</returns>
 		Shader shaderForTransition();

@@ -89,7 +89,8 @@ namespace Prime31.TransitionKit
 
 			// create the Material
 			material = getOrAddComponent<MeshRenderer>().material;
-			material.shader = _transitionKitDelegate.shaderForTransition() ?? Shader.Find( "Unlit/Texture" );
+			material.shader = _transitionKitDelegate.shaderForTransition() ?? Shader.Find( "prime[31]/Transitions/Texture With Alpha" );
+			material.color = Color.white; // reset to fully white
 
 			// snapshot the main camera before proceeding
 			_instance.StartCoroutine( _instance.setupCameraAndTexture() );
@@ -229,8 +230,8 @@ namespace Prime31.TransitionKit
 			while( Application.loadedLevel != level )
 				yield return null;
 		}
-		
-		
+
+
 		/// <summary>
 		/// the most common type of transition seems to be one that ticks progress from 0 - 1. This method takes care of that for you
 		/// if your transition needs to have a _Progress property ticked after the scene loads.
@@ -241,7 +242,7 @@ namespace Prime31.TransitionKit
 		{
 			var start = reverseDirection ? 1f : 0f;
 			var end = reverseDirection ? 0f : 1f;
-			
+
 			var elapsed = 0f;
 			while( elapsed < duration )
 			{
