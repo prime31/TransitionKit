@@ -3,7 +3,7 @@ TransitionKit
 
 Modular, extensible transitions in-scene and between scenes. TransitionKit aims to make transitions easy. The main gist of how it works is that when invoked it snaps a screenshot and sticks it on a quad (by default but you can override this behavior). This means that you can reuse any of your full screen image effects with TransitionKit since it works in fundamentally the exact same way.
 
-Side note: if you make any neat transitions feel free to send over a pull request so we can build up a nice library of useful transitions!
+Side notes: if you make any neat transitions feel free to send over a pull request so we can build up a nice library of useful transitions! If the shaders used in your transitions (or the included transitions) are not used anywhere else you have to tell Unity to still included them in the build. You can do this by opening Edit -> Project Settings -> Graphics and stick the shaders in the "Always Included Shaders" section like so: ![Graphics Settings](http://cl.ly/YTh4/Screen%20Shot%202014-11-11%20at%209.11.14%20AM.png)
 
 
 

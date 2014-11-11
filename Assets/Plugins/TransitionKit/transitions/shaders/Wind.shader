@@ -29,17 +29,18 @@ uniform float _Progress;
 uniform float _Size;
 
 
-float rand( vec2 co )
+float rand( half2 co )
 {
-  return fract( sin( dot( co.xy, vec2( 12.9898,78.233 ) ) ) * 43758.5453 );
+	float x = sin( dot( co.xy, half2( 12.9898,78.233 ) ) ) * 43758.5453;
+	return x - floor( x );
 }
 
 
 fixed4 frag( v2f_img i ) : COLOR
 {
-	float r = rand( vec2( 0, i.uv.y ) );
+	float r = rand( half2( 0, i.uv.y ) );
 	float m = smoothstep( 0.0, -_Size, i.uv.x * ( 1.0 - _Size ) + _Size * r - ( _Progress * ( 1.0 + _Size ) ) );
-	return mix( tex2D( _MainTex, i.uv ), half4( 0.0 ), m );
+	return lerp( tex2D( _MainTex, i.uv ), half4( 0.0 ), m );
 }
 
 ENDCG

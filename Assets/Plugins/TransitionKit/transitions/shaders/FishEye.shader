@@ -36,10 +36,10 @@ uniform float _ColorSeparation;
 fixed4 frag( v2f_img i ) : COLOR
 {
 	float inv = 1.0 - _Progress;
-	vec2 disp = _Size * half2( cos( _Zoom * i.uv.x ), sin( _Zoom * i.uv.y ) );
+	float2 disp = _Size * half2( cos( _Zoom * i.uv.x ), sin( _Zoom * i.uv.y ) );
 	half4 texTo = half4( 0.0 );
 
-	vec4 texFrom = vec4
+	half4 texFrom = half4
 	(
 		tex2D( _MainTex, i.uv + _Progress * disp * ( 1.0 - _ColorSeparation ) ).r,
 		tex2D( _MainTex, i.uv + _Progress * disp ).g,

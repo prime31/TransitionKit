@@ -28,17 +28,16 @@ uniform float _BlurSize;
 
 fixed4 frag( v2f_img i ) : COLOR
 {
-	vec2 vTexCoord = i.uv;
-	vec4 sum = vec4( 0.0 );
-	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y - 4.0 * _BlurSize ) ) * 0.05;
-	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y - 3.0 * _BlurSize ) ) * 0.09;
-	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y - 2.0 * _BlurSize ) ) * 0.12;
-	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y - _BlurSize ) ) * 0.15;
-	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y ) ) * 0.16;
-	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y + _BlurSize ) ) * 0.15;
-	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y + 2.0 * _BlurSize ) ) * 0.12;
-	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y + 3.0 * _BlurSize ) ) * 0.09;
-	sum += tex2D( _MainTex, vec2( vTexCoord.x, vTexCoord.y + 4.0 * _BlurSize ) ) * 0.05;
+	half4 sum = half4( 0.0 );
+	sum += tex2D( _MainTex, half2( i.uv.x, i.uv.y - 4.0 * _BlurSize ) ) * 0.05;
+	sum += tex2D( _MainTex, half2( i.uv.x, i.uv.y - 3.0 * _BlurSize ) ) * 0.09;
+	sum += tex2D( _MainTex, half2( i.uv.x, i.uv.y - 2.0 * _BlurSize ) ) * 0.12;
+	sum += tex2D( _MainTex, half2( i.uv.x, i.uv.y - _BlurSize ) ) * 0.15;
+	sum += tex2D( _MainTex, half2( i.uv.x, i.uv.y ) ) * 0.16;
+	sum += tex2D( _MainTex, half2( i.uv.x, i.uv.y + _BlurSize ) ) * 0.15;
+	sum += tex2D( _MainTex, half2( i.uv.x, i.uv.y + 2.0 * _BlurSize ) ) * 0.12;
+	sum += tex2D( _MainTex, half2( i.uv.x, i.uv.y + 3.0 * _BlurSize ) ) * 0.09;
+	sum += tex2D( _MainTex, half2( i.uv.x, i.uv.y + 4.0 * _BlurSize ) ) * 0.05;
 
 	return sum;
 }

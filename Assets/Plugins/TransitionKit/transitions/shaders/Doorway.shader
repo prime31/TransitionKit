@@ -63,7 +63,7 @@ fixed4 frag( v2f_img i ) : COLOR
 		pfr.y += d / 2.;
 	}
 
-  float size = mix( 1.0, _Depth, 1.0 - _Progress );
+  float size = lerp( 1.0, _Depth, 1.0 - _Progress );
   pto = ( i.uv + half2( -0.5, -0.5 ) ) * half2( size, size ) + half2( 0.5, 0.5 );
 
   if( inBounds( pfr ))
