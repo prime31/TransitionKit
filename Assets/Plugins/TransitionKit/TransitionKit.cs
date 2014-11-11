@@ -80,6 +80,7 @@ namespace Prime31.TransitionKit
 			return component;
 		}
 
+
 		void initialize()
 		{
 			// create the MeshFilter

@@ -3,7 +3,7 @@
 	Properties
 	{
 		_MainTex ( "Base (RGB)", 2D ) = "white" {}
-		_Progress ( "Progress", Range( 0.0, 1.0 ) ) = 0.5
+		_Progress ( "Progress", Range( 0.0, 1.0 ) ) = 0.0
 		_Amplitude ( "Amplitude", Float ) = 100.0
 		_Speed ( "Speed", Float ) = 50.0
 	}

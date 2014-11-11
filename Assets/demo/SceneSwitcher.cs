@@ -24,6 +24,13 @@ public class SceneSwitcher : MonoBehaviour
 		if( !_isUiVisible )
 			return;
 
+		if( Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android )
+		{
+			// bigger buttons for higher res mobile devices
+			if( Screen.width >= 1500 || Screen.height >= 1500 )
+				GUI.skin.button.fixedHeight = 60;
+		}
+
 		if( GUILayout.Button( "Fade to Scene" ) )
 		{
 			var fader = new FadeTransition()
@@ -107,7 +114,9 @@ public class SceneSwitcher : MonoBehaviour
 			var squares = new SquaresTransition()
 			{
 				nextScene = Application.loadedLevel == 1 ? 2 : 1,
-				duration = 2.0f
+				duration = 2.0f,
+				squareSize = new Vector2( 5f, 4f ),
+				smoothness = 0.0f
 			};
 			TransitionKit.instance.transitionWithDelegate( squares );
 		}
