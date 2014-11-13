@@ -40,7 +40,7 @@ fixed4 frag( v2f_img i ) : COLOR
 {
 	float r = rand( half2( 0, i.uv.y ) );
 	float m = smoothstep( 0.0, -_Size, i.uv.x * ( 1.0 - _Size ) + _Size * r - ( _Progress * ( 1.0 + _Size ) ) );
-	return lerp( tex2D( _MainTex, i.uv ), half4( 0.0 ), m );
+	return lerp( tex2D( _MainTex, i.uv ), half4( 0.0, 0.0, 0.0, 0.0 ), m );
 }
 
 ENDCG

@@ -37,7 +37,7 @@ fixed4 frag( v2f_img i ) : COLOR
 {
 	float inv = 1.0 - _Progress;
 	float2 disp = _Size * half2( cos( _Zoom * i.uv.x ), sin( _Zoom * i.uv.y ) );
-	half4 texTo = half4( 0.0 );
+	half4 texTo = half4( 0.0, 0.0, 0.0, 0.0 );
 
 	half4 texFrom = half4
 	(
