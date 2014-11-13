@@ -28,7 +28,7 @@ uniform float _BlurSize;
 
 fixed4 frag( v2f_img i ) : COLOR
 {
-	half4 sum = half4( 0.0 );
+	fixed4 sum = fixed4( 0.0, 0.0, 0.0, 0.0 );
 	sum += tex2D( _MainTex, half2( i.uv.x, i.uv.y - 4.0 * _BlurSize ) ) * 0.05;
 	sum += tex2D( _MainTex, half2( i.uv.x, i.uv.y - 3.0 * _BlurSize ) ) * 0.09;
 	sum += tex2D( _MainTex, half2( i.uv.x, i.uv.y - 2.0 * _BlurSize ) ) * 0.12;

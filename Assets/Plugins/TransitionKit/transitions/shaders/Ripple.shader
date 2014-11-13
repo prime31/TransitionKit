@@ -37,7 +37,7 @@ fixed4 frag( v2f_img i ) : COLOR
 	float dist = length( dir );
 	half2 offset = dir * ( sin( _Time.x * dist * _Amplitude - _Progress * _Speed ) + 0.5 ) / 30.0;
 
-	return lerp( tex2D( _MainTex, i.uv + offset ), half4( 0.0, 0.0, 0.0, 0.0 ), smoothstep( 0.5, 1.0, _Progress ) );
+	return lerp( tex2D( _MainTex, i.uv + offset ), fixed4( 0.0, 0.0, 0.0, 0.0 ), smoothstep( 0.5, 1.0, _Progress ) );
 }
 
 ENDCG

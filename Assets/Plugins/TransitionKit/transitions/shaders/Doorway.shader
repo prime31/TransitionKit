@@ -69,7 +69,7 @@ fixed4 frag( v2f_img i ) : COLOR
   if( inBounds( pfr ))
     return tex2D( _MainTex, pfr );
   else
-    return half4( 0.0, 0.0, 0.0, 0.0 );
+    return fixed4( 0.0, 0.0, 0.0, 0.0 );
 }
 
 ENDCG

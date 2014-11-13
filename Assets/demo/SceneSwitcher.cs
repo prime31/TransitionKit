@@ -214,6 +214,20 @@ public class SceneSwitcher : MonoBehaviour
 			};
 			TransitionKit.instance.transitionWithDelegate( wind );
 		}
+
+
+		if( GUILayout.Button( "Curved Wind to Scene" ) )
+		{
+			var wind = new WindTransition()
+			{
+				useCurvedWind = true,
+				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				duration = 1.0f,
+				size = 0.3f,
+				windVerticalSegments = 300f
+			};
+			TransitionKit.instance.transitionWithDelegate( wind );
+		}
 	}
 
 
