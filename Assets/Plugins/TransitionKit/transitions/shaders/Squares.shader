@@ -35,9 +35,9 @@ uniform float _Smoothness;
 
 
 
-float rand( half2 co )
+float rand( float2 co )
 {
-	float x = sin( dot( co.xy, half2( 12.9898,78.233 ) ) ) * 43758.5453;
+	float x = sin( dot( co.xy, float2( 12.9898, 78.233 ) ) ) * 43758.5453;
 	return x - floor( x );
 }
 
