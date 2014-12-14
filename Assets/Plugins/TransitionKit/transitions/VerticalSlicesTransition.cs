@@ -128,7 +128,7 @@ namespace Prime31.TransitionKit
 				yield return transitionKit.StartCoroutine( transitionKit.waitForLevelToLoad( nextScene ) );
 			}
 
-			var transitionDistance = 10f; // 2x our camera.orthoSize so we move the slices off screen
+			var transitionDistance = transitionKit.camera.orthographicSize * 2f; // 2x our camera.orthoSize so we move the slices off screen
 			var elapsed = 0f;
 			var mesh = transitionKit.GetComponent<MeshFilter>().mesh;
 			var verts = mesh.vertices;

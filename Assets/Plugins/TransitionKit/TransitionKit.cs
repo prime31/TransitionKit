@@ -207,8 +207,8 @@ namespace Prime31.TransitionKit
 
 
 		/// <summary>
-		/// makes a single pixel Texture2D with a transparent pixel. Useful for fading from obscured to a new scene. Note that of course
-		/// your shader must support transparency for this to be useful
+		/// makes a single pixel Texture2D with a transparent pixel and sets it on the current Material. Useful for fading from obscured to a
+		/// new scene. Note that of course your shader must support transparency for this to be useful
 		/// </summary>
 		public void makeTextureTransparent()
 		{

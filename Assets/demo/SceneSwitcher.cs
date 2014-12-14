@@ -8,6 +8,7 @@ using Prime31.TransitionKit;
 /// </summary>
 public class SceneSwitcher : MonoBehaviour
 {
+	public Texture2D maskTexture;
 	private bool _isUiVisible = true;
 
 
@@ -227,6 +228,18 @@ public class SceneSwitcher : MonoBehaviour
 				windVerticalSegments = 300f
 			};
 			TransitionKit.instance.transitionWithDelegate( wind );
+		}
+
+
+		if( GUILayout.Button( "Mask to Scene" ) )
+		{
+			var mask = new ImageMaskTransition()
+			{
+				maskTexture = maskTexture,
+				backgroundColor = Color.yellow,
+				nextScene = Application.loadedLevel == 1 ? 2 : 1
+			};
+			TransitionKit.instance.transitionWithDelegate( mask );
 		}
 	}
 
