@@ -135,7 +135,7 @@ namespace Prime31.TransitionKit
 
 			while( elapsed < duration )
 			{
-				elapsed += Time.deltaTime;
+				elapsed += transitionKit.deltaTime;
 				var step = Mathf.Pow( elapsed / duration, 2f );
 				var offset = Mathf.Lerp( 0, transitionDistance, step );
 

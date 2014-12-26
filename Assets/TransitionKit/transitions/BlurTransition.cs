@@ -43,7 +43,7 @@ namespace Prime31.TransitionKit
 			var elapsed = 0f;
 			while( elapsed < duration )
 			{
-				elapsed += Time.deltaTime;
+				elapsed += transitionKit.deltaTime;
 				var step = Mathf.Pow( elapsed / duration, 2f );
 				var blurAmount = Mathf.Lerp( blurMin, blurMax, step );
 

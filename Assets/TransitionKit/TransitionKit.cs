@@ -40,6 +40,20 @@ namespace Prime31.TransitionKit
 		/// </summary>
 		public Material material;
 
+		/// <summary>
+		/// sets whether TransitionKit will use unscaledDeltaTime or standard deltaTime
+		/// </summary>
+		public bool useUnscaledDeltaTime = false;
+
+		/// <summary>
+		/// helper property for use by all TransitionKitDelegates so they use the proper deltaTime
+		/// </summary>
+		/// <value>The delta time.</value>
+		public float deltaTime
+		{
+			get { return useUnscaledDeltaTime ? Time.unscaledDeltaTime : Time.deltaTime; }
+		}
+
 
 		/// <summary>
 		/// holds the instance while we are transitioning
@@ -246,7 +260,7 @@ namespace Prime31.TransitionKit
 			var elapsed = 0f;
 			while( elapsed < duration )
 			{
-				elapsed += Time.deltaTime;
+				elapsed += deltaTime;
 				var step = Mathf.Lerp( start, end, Mathf.Pow( elapsed / duration, 2f ) );
 				material.SetFloat( "_Progress", step );
 

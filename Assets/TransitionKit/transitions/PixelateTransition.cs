@@ -59,7 +59,7 @@ namespace Prime31.TransitionKit
 			var elapsed = 0f;
 			while( elapsed < duration )
 			{
-				elapsed += Time.deltaTime;
+				elapsed += transitionKit.deltaTime;
 				var step = Mathf.Pow( elapsed / duration, 2f );
 				transitionKit.material.SetFloat( "_CellSize", Mathf.Lerp( startValue, endValue, step ) );
 
@@ -90,22 +90,22 @@ namespace Prime31.TransitionKit
 					break;
 			}
 
-			yield return transitionKit.StartCoroutine( animateScale( transitionKit.transform, duration * 0.5f, desiredScale ) );
+			yield return transitionKit.StartCoroutine( animateScale( transitionKit, duration * 0.5f, desiredScale ) );
 		}
 
 		#endregion
 
 
-		public IEnumerator animateScale( Transform transform, float duration, Vector3 desiredScale )
+		public IEnumerator animateScale( TransitionKit transitionKit, float duration, Vector3 desiredScale )
 		{
-			var originalScale = transform.localScale;
+			var originalScale = transitionKit.transform.localScale;
 
 			var elapsed = 0f;
 			while( elapsed < duration )
 			{
-				elapsed += Time.deltaTime;
+				elapsed += transitionKit.deltaTime;
 				var step = Mathf.Pow( elapsed / duration, 2f );
-				transform.localScale = Vector3.Lerp( originalScale, desiredScale, step );
+				transitionKit.transform.localScale = Vector3.Lerp( originalScale, desiredScale, step );
 
 				yield return null;
 			}
