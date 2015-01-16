@@ -11,7 +11,8 @@ Shader "prime[31]/Transitions/Mask"
 
 	SubShader
 	{
-		Tags { "RenderType" = "Opaque" }
+		Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
+		Blend SrcAlpha OneMinusSrcAlpha
 		Lighting Off
 
 		Pass
@@ -42,9 +43,9 @@ CGPROGRAM
 
 
 
-	float map01( float value, float rightMin, float rightMax )
+	float mapper( float value, float min, float max )
 	{
-		return rightMin + value * ( rightMax - rightMin );
+		return min + value * ( max - min );
 	}
 
 
@@ -55,8 +56,8 @@ CGPROGRAM
 		o.uv = MultiplyUV( UNITY_MATRIX_TEXTURE0, v.texcoord );
 
 		// _ST.xy is scale and _ST.zw is offset
-		float tiling = map01( _Progress, 0.5, 13.0 );
-		float offset = map01( _Progress, 0.25, -6.0 );
+		float tiling = mapper( _Progress, 0.5, 13.0 );
+		float offset = mapper( _Progress, 0.25, -6.0 );
 		o.uvMask = v.texcoord.xy * ( _MaskTex_ST.xy * tiling ) + ( half2( offset ) );
 
 		return o;

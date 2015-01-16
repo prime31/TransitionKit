@@ -53,8 +53,7 @@ namespace Prime31.TransitionKit
 			if( nextScene >= 0 )
 				yield return transitionKit.StartCoroutine( transitionKit.waitForLevelToLoad( nextScene ) );
 
-			// now that the new scene is loaded we swap to the Fade shader and fade back in
-			transitionKit.material.shader = Shader.Find( "prime[31]/Transitions/Fader" );
+			// now that the new scene is loaded we zoom the mask back out
 			transitionKit.makeTextureTransparent();
 
 			yield return transitionKit.StartCoroutine( transitionKit.tickProgressPropertyInMaterial( duration, true ) );
