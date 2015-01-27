@@ -13,7 +13,7 @@ namespace Prime31.TransitionKit
 	{
 		public Texture2D maskTexture;
 		public Color backgroundColor = Color.black;
-		public float duration = 0.5f;
+		public float duration = 0.9f;
 		public int nextScene = -1;
 
 
