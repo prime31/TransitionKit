@@ -148,7 +148,7 @@ namespace Prime31.TransitionKit
 			transitionKitCamera = getOrAddComponent<Camera>();
 
 			// always reset these in case a transition messed with them
-			transitionKitCamera.isOrthoGraphic = true;
+			transitionKitCamera.orthographic = true;
 			transitionKitCamera.nearClipPlane = -1f;
 			transitionKitCamera.farClipPlane = 1f;
 			transitionKitCamera.depth = float.MaxValue;
