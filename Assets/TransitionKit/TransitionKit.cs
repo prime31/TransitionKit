@@ -54,6 +54,11 @@ namespace Prime31.TransitionKit
 			get { return useUnscaledDeltaTime ? Time.unscaledDeltaTime : Time.deltaTime; }
 		}
 
+		/// <summary>
+		/// stick whatever you want in there so that when the events fire you can grab it and avoid the Action allocations
+		/// </summary>
+		public object context;
+
 
 		/// <summary>
 		/// holds the instance while we are transitioning
@@ -187,6 +192,7 @@ namespace Prime31.TransitionKit
 				onTransitionComplete();
 
 			_transitionKitDelegate = null;
+			context = null;
 
 			// if we are keeping TK alive we only need to free resources and not delete ourself completely
 			if( keepTransitionKitInstance )
