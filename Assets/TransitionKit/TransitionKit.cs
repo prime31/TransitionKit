@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 
 namespace Prime31.TransitionKit
@@ -247,7 +248,7 @@ namespace Prime31.TransitionKit
 		/// <param name="level">Level.</param>
 		public IEnumerator waitForLevelToLoad( int level )
 		{
-			while( Application.loadedLevel != level )
+			while( SceneManager.GetActiveScene().buildIndex != level )
 				yield return null;
 		}
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Prime31.TransitionKit;
+using UnityEngine.SceneManagement;
 
 
 /// <summary>
@@ -15,7 +16,7 @@ public class SceneSwitcher : MonoBehaviour
 	void Awake()
 	{
 		DontDestroyOnLoad( gameObject );
-		Application.LoadLevel( 1 );
+		SceneManager.LoadScene( 1 );
 	}
 
 
@@ -36,7 +37,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var fader = new FadeTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				fadedDelay = 0.2f,
 				fadeToColor = Color.black
 			};
@@ -48,7 +49,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var slices = new VerticalSlicesTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				divisions = Random.Range( 3, 20 )
 			};
 			TransitionKit.instance.transitionWithDelegate( slices );
@@ -59,7 +60,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var slices = new TriangleSlicesTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				divisions = Random.Range( 2, 10 )
 			};
 			TransitionKit.instance.transitionWithDelegate( slices );
@@ -73,7 +74,7 @@ public class SceneSwitcher : MonoBehaviour
 
 			var pixelater = new PixelateTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				finalScaleEffect = randomScaleEffect,
 				duration = 1.0f
 			};
@@ -91,7 +92,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var blur = new BlurTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				duration = 2.0f,
 				blurMax = 0.01f
 			};
@@ -114,7 +115,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var squares = new SquaresTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				duration = 2.0f,
 				squareSize = new Vector2( 5f, 4f ),
 				smoothness = 0.0f
@@ -127,7 +128,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var squares = new SquaresTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				duration = 2.0f,
 				squareSize = new Vector2( 64f, 45f ),
 				squareColor = Color.yellow,
@@ -141,7 +142,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var ripple = new RippleTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				duration = 1.0f,
 				amplitude = 1500f,
 				speed = 20f
@@ -154,7 +155,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var fishEye = new FishEyeTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				duration = 1.0f,
 				size = 0.08f,
 				zoom = 10.0f,
@@ -168,7 +169,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var fishEye = new FishEyeTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				duration = 2.0f,
 				size = 0.2f,
 				zoom = 100.0f,
@@ -182,7 +183,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var doorway = new DoorwayTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				duration = 1.0f,
 				perspective = 1.5f,
 				depth = 3f,
@@ -196,7 +197,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var doorway = new DoorwayTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				duration = 1.0f,
 				perspective = 1.1f,
 				runEffectInReverse = true
@@ -209,7 +210,7 @@ public class SceneSwitcher : MonoBehaviour
 		{
 			var wind = new WindTransition()
 			{
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				duration = 1.0f,
 				size = 0.3f
 			};
@@ -222,7 +223,7 @@ public class SceneSwitcher : MonoBehaviour
 			var wind = new WindTransition()
 			{
 				useCurvedWind = true,
-				nextScene = Application.loadedLevel == 1 ? 2 : 1,
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1,
 				duration = 1.0f,
 				size = 0.3f,
 				windVerticalSegments = 300f
@@ -237,7 +238,7 @@ public class SceneSwitcher : MonoBehaviour
 			{
 				maskTexture = maskTexture,
 				backgroundColor = Color.yellow,
-				nextScene = Application.loadedLevel == 1 ? 2 : 1
+				nextScene = SceneManager.GetActiveScene().buildIndex == 1 ? 2 : 1
 			};
 			TransitionKit.instance.transitionWithDelegate( mask );
 		}

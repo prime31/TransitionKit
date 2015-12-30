@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Prime31.TransitionKit;
+using UnityEngine.SceneManagement;
 
 namespace Prime31.TransitionKit
 {
@@ -129,7 +130,7 @@ namespace Prime31.TransitionKit
 			transitionKit.transitionKitCamera.clearFlags = CameraClearFlags.Nothing;
 
 			if( nextScene >= 0 )
-				Application.LoadLevelAsync( nextScene );
+				SceneManager.LoadSceneAsync( nextScene );
 
 			// we dont transition back to the new scene unless it is loaded
 			if( nextScene >= 0 )

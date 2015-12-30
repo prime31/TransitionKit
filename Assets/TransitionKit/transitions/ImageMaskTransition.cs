@@ -7,6 +7,9 @@ using Prime31.TransitionKit;
 /// the maskTexture will show the background image (screen grab) where it is transparent and the backgroundColor where it is not.
 /// it zooms to a point in the center of the screen then fades back in after the new scene loads.
 /// </summary>
+using UnityEngine.SceneManagement;
+
+
 namespace Prime31.TransitionKit
 {
 	public class ImageMaskTransition : TransitionKitDelegate
@@ -44,7 +47,7 @@ namespace Prime31.TransitionKit
 			transitionKit.material.SetTexture( "_MaskTex", maskTexture );
 
 			if( nextScene >= 0 )
-				Application.LoadLevelAsync( nextScene );
+				SceneManager.LoadSceneAsync( nextScene );
 
 			// this does the zoom/rotation
 			yield return transitionKit.StartCoroutine( transitionKit.tickProgressPropertyInMaterial( duration ) );

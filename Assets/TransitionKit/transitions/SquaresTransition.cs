@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Prime31.TransitionKit;
+using UnityEngine.SceneManagement;
 
 
 namespace Prime31.TransitionKit
@@ -43,7 +44,7 @@ namespace Prime31.TransitionKit
 			transitionKit.material.SetVector( "_Size", squareSize );
 
 			if( nextScene >= 0 )
-				Application.LoadLevelAsync( nextScene );
+				SceneManager.LoadSceneAsync( nextScene );
 
 			yield return transitionKit.StartCoroutine( transitionKit.tickProgressPropertyInMaterial( duration ) );
 

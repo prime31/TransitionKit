@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Prime31.TransitionKit;
+using UnityEngine.SceneManagement;
 
 
 namespace Prime31.TransitionKit
@@ -38,7 +39,7 @@ namespace Prime31.TransitionKit
 			transitionKit.transitionKitCamera.clearFlags = CameraClearFlags.Nothing;
 
 			if( nextScene >= 0 )
-				Application.LoadLevelAsync( nextScene );
+				SceneManager.LoadSceneAsync( nextScene );
 
 			var elapsed = 0f;
 			while( elapsed < duration )
