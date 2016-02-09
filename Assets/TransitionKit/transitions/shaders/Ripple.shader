@@ -33,7 +33,7 @@ uniform float _Speed;
 
 fixed4 frag( v2f_img i ) : COLOR
 {
-	half2 dir = i.uv - half2( 0.5 );
+	half2 dir = i.uv - half2( 0.5, 0.5 );
 	float dist = length( dir );
 	half2 offset = dir * ( sin( _Time.x * dist * _Amplitude - _Progress * _Speed ) + 0.5 ) / 30.0;
 

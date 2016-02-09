@@ -50,8 +50,8 @@ fixed4 frag( v2f_img i ) : COLOR
 	if( _Direction == 1 )
 		_Progress = _Progress * -1.0;
 
-	half2 pfr = half2( -1.0 );
-	half2 pto = half2( -1.0 );
+	half2 pfr = half2( -1.0, -1.0 );
+	half2 pto = half2( -1.0, -1.0 );
 
 	float middleSlit = 2.0 * abs( i.uv.x - 0.5 ) - _Progress;
 	if( middleSlit > 0.0 )
