@@ -1,4 +1,6 @@
-﻿// where _MaskTex is
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// where _MaskTex is
 Shader "prime[31]/Transitions/Mask"
 {
 	Properties
@@ -52,7 +54,7 @@ CGPROGRAM
 	v2f vert( appdata_img v )
 	{
 		v2f o;
-		o.pos = mul( UNITY_MATRIX_MVP, v.vertex );
+		o.pos = UnityObjectToClipPos( v.vertex );
 		o.uv = MultiplyUV( UNITY_MATRIX_TEXTURE0, v.texcoord );
 
 		// _ST.xy is scale and _ST.zw is offset
